@@ -1,0 +1,22 @@
+import pyspark
+
+To create a DataFrame in PySpark, you can follow these steps:
+1. Import the required PySpark modules
+2. Create a SparkSession object
+3. Define the schema for the DataFrame
+4. Create a list of rows to populate the DataFrame
+5. Create a DataFrame using the createDataFrame() method of the SparkSession object
+
+from pyspark.sql.types import _parse_datatype_string
+
+data=[(1,'Shiju'),(2,'Ryan')]
+schema="id Integer ,Name String "
+df=createDataFrame(data,Schema)
+df.printSchema
+display(df)
+
+
+#By defualt Nullable is true ..
+
+
+https://www.youtube.com/watch?v=ByreMfIxVQQ
