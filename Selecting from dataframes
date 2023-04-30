@@ -1,0 +1,56 @@
+import pyspark
+from pyspark.sql import SparkSession
+
+spark = SparkSession.builder.appName('SparkByExamples.com').getOrCreate()
+
+data = [("James","","Smith","36636","M",60000),
+        ("Michael","Rose","","40288","M",70000),
+        ("Robert","","Williams","42114","",400000),
+        ("Maria","Anne","Jones","39192","F",500000),
+        ("Jen","Mary","Brown","","F",0)]
+
+columns = ["first_name","middle_name","last_name","dob","gender","salary"]
+pysparkDF = spark.createDataFrame(data = data, schema = columns)
+pysparkDF.printSchema()
+pysparkDF.show(truncate=False)
+
+
+
+#see the data
+pysparkDF.show()
+
+#Selecting columns 
+
+#pysparkDF.select("first_name","last_name").show()
+#pysparkDF.select(pysparkDF.first_name,pysparkDF.last_name).show()
+#pysparkDF.select(pysparkDF["first_name"],pysparkDF["last_name"]).show()
+
+
+from pyspark.sql.functions import col
+#pysparkDF.select(col("first_name"),col("first_name")).show()
+
+#Select columns by regular expression
+pysparkDF.select(pysparkDF.colRegex("`^.*name*`")).show()
+
+
+# Select All columns from List
+pysparkDF.select(*columns).show()
+
+# Select All columns
+pysparkDF.select([col for col in pysparkDF.columns]).show()
+pysparkDF.select("*").show()
+
+
+Select Columns by Index
+
+
+#Selects first 3 columns and top 3 rows
+pysparkDF.select(pysparkDF.columns[:3]).show(3)
+
+#Selects columns 2 to 4  and top 3 rows
+pysparkDF.select(pysparkDF.columns[2:4]).show(3)
+
+
+
+
+
