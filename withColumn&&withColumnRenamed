@@ -1,0 +1,52 @@
+
+1.Change DataType using PySpark withColumn()
+2.Update The Value of an Existing Column
+3.Create a Column from an Existing
+4.Add a New Column using withColumn()
+
+ 
+ 
+1. Casting the datatype
+ 
+ df.withColumn("salary",col("salary").cast("Integer")).show()
+ 
+2.Adding new column and value 
+
+Withcolum
+Lit
+
+from pyspark.sql import SparkSession
+from pyspark.sql.functions import col, lit
+
+
+#pysparkDF.withColumn("Country", lit("USA")).show()
+dfnew=pysparkDF.withColumn("Country", lit("USA")) \
+  .withColumn("anotherColumn",lit("anotherValue")) \
+  
+3.Update The Value of an Existing Column
+dfnew.withColumn("salary",col("salary")*100).show()
+
+
+4.Add a newcolum
+df=dfnew.withColumn("Newsal",col("salary")*100)
+
+
+4.Rename Column Name
+
+dfnew.withColumnRenamed("gender","sex").show()
+
+df.withColumnRenamed("gender","sex") \
+  .show(truncate=False) 
+  
+  
+5.Drop a column
+df.drop("Newsal") \
+  .show() 
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 
