@@ -1,0 +1,52 @@
+from pyspark.sql import SparkSession
+spark_session = SparkSession.builder \
+    .master('local[1]') \
+    .appName('Example') \
+    .getOrCreate()
+
+df = spark_session.createDataFrame(
+    [
+       (1, 'UK', 'London', 23060,None),
+       (2, 'US', 'New York', 2355,8000000),
+       (3, 'US', 'Washington DC',23457, None),
+       (4, None, 'Manchester', 5677,550000),
+      (5,None,None,None,None)
+    ],
+    ['id', 'country', 'city', 'zip','population']
+)
+df.show()
+
+
+
+
+
+#Replace 0 for null for all integer columns
+df.na.fill(value=0).show()
+
+or 
+df.na.fill(0,subset=["population","zip"]).show() # no value keyword
+
+
+
+
+#Replace 0 for null on only population column 
+df.na.fill(value=0,subset=["population"]).show()
+
+
+#Replace 0 for null on only population adn zip. ie Multiple column 
+df.na.fill(value=0,subset=["population","zip"]).show()
+
+#Multiple columm with multiple values.
+
+df.na.fill("unknown",["city"]) \
+    .na.fill(0,["Zip"]).show()
+    
+    or
+    
+    df.na.fill({"city": "unknown", "Zip": 0}) \
+    .show()
+
+PySpark Replace Null/None Value with Empty String
+df.na.fill("").show()
+
+
