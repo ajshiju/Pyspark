@@ -1,0 +1,6 @@
+
+Apache Parquet is column-oriented and designed to provide efficient columnar storage compared to row-based file types such as CSV.
+Parquet files were designed with complex nested data structures in mind.
+Apache Parquet is designed to support very efficient compression and encoding schemes.
+Apache Parquet generates lower storage costs for data files and maximizes the effectiveness of data queries with current cloud technologies such as Amazon Athena, Redshift Spectrum, BigQuery and Azure Data Lakes.
+Licensed under the Apache license and available for any project.
