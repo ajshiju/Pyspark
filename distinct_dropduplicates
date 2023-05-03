@@ -1,0 +1,31 @@
+# Difference between distinct() vs dropDuplicates()
+
+# Import
+from pyspark.sql import SparkSession
+spark = SparkSession.builder.appName('SparkByExamples.com').getOrCreate()
+
+# Prepare data
+data = [("James", "Sales", 3000), \
+    ("Michael", "Sales", 4600), \
+    ("Robert", "Sales", 4600), \
+    ("James", "Sales", 3000)
+  ]
+columns= ["employee_name", "department", "salary"]
+
+# Create DataFrame
+df = spark.createDataFrame(data = data, schema = columns)
+df.printSchema()
+df.show(truncate=False)
+
+# Using distinct()
+distinctDF = df.distinct()
+distinctDF.show(truncate=False)
+
+# Using dropDuplicates()
+dropDisDF = df.dropDuplicates(["department","salary"])
+dropDisDF.show(truncate=False)
+
+# Using dropDuplicates() on single column
+dropDisDF = df.dropDuplicates(["salary"]).select("salary")
+dropDisDF.show(truncate=False)
+print(dropDisDF.collect())
